@@ -1,4 +1,8 @@
-var searchTweets = function(client, query, callback) {
+var Twit = require('twit')
+
+var searchTweets = function(config, query, callback) {
+
+  var twitterClient = new Twit(config);
 
   console.log('about to fetch from search/tweets with query ' + query);
 
@@ -15,7 +19,7 @@ var searchTweets = function(client, query, callback) {
 
     if (maxId) params.max_id = maxId;
 
-    client.get('search/tweets', params, function(err, data, response) {
+    twitterClient.get('search/tweets', params, function(err, data, response) {
 
       if (err) {
         console.log('error fetching search/tweets with params', params);
